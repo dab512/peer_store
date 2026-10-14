@@ -7,14 +7,14 @@
 Apple Silicon (arm64) и Intel (amd64), preview `v0.1.0-preview.1`:
 
 ```bash
-/bin/bash -c 'set -euo pipefail; umask 077; d=$(mktemp -d); trap '"'"'rm -rf "$d"'"'"' EXIT; trap '"'"'exit 130'"'"' INT; trap '"'"'exit 143'"'"' TERM; curl --proto '"'"'=https'"'"' --proto-redir '"'"'=https'"'"' --tlsv1.2 --fail --location --silent --show-error --output "$d/install-macos.sh" https://github.com/dab512/peer_store/releases/download/v0.1.0-preview.1/install-macos.sh; printf "%s  %s\n" d0921a14dbf46d730878bfab051c0c4f6d5e85c54c5d92db3ee333f36b28fc0c "$d/install-macos.sh" > "$d/checksum"; shasum -a 256 -c "$d/checksum"; /bin/bash "$d/install-macos.sh"'
+/bin/bash -c 'set -euo pipefail; umask 077; d=$(mktemp -d); trap '"'"'rm -rf "$d"'"'"' EXIT; trap '"'"'exit 130'"'"' INT; trap '"'"'exit 143'"'"' TERM; curl --proto '"'"'=https'"'"' --proto-redir '"'"'=https'"'"' --tlsv1.2 --fail --location --silent --show-error --output "$d/install-macos.sh" https://github.com/dab512/peer_store/releases/download/v0.1.0-preview.1/install-macos.sh; printf "%s  %s\n" cfa3b85d23ac9716744dfcfb672d0b39a5a0915b0e6c594c03e3bf75eb7a0fca "$d/install-macos.sh" > "$d/checksum"; shasum -a 256 -c "$d/checksum"; /bin/bash "$d/install-macos.sh"'
 ```
 
 Команда скачивает установщик фиксированного релиза, проверяет его закреплённый SHA-256 **до выполнения**, затем установщик проверяет SHA-256 подходящего бинарного архива. Устанавливает в `~/.peerstore/bin/peerstore`, создаёт локальную identity в `~/.peerstore/node`; sudo, изменения firewall/роутера и PATH не нужны.
 
 **Новый узел получит `awaiting_admission`.** Его публичная подписанная заявка — `~/.peerstore/node/config/join-request.json`; private key остаётся на компьютере. Установка не даёт права участия в mesh; dynamic join пока не реализован. Существующие ключи не перезаписываются. Запуск неизвестного ключа не обходит эту проверку.
 
-[Релиз](https://github.com/dab512/peer_store/releases/tag/v0.1.0-preview.1) содержит архивы двух архитектур, `install-macos.sh`, `SHA256SUMS` и public `nodes.json`. Hash установщика: `d0921a14dbf46d730878bfab051c0c4f6d5e85c54c5d92db3ee333f36b28fc0c`. Независимо доверенный hash этой команды — начальная точка доверия; чтение hash и скрипта из одного подменённого источника не обеспечивает независимую проверку.
+[Релиз](https://github.com/dab512/peer_store/releases/tag/v0.1.0-preview.1) содержит архивы двух архитектур, `install-macos.sh`, `SHA256SUMS` и public `nodes.json`. Hash установщика: `cfa3b85d23ac9716744dfcfb672d0b39a5a0915b0e6c594c03e3bf75eb7a0fca`. Независимо доверенный hash этой команды — начальная точка доверия; чтение hash и скрипта из одного подменённого источника не обеспечивает независимую проверку.
 
 ## Сеть и список узлов
 
